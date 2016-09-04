@@ -90,14 +90,14 @@ char* strrchr(const char *str, int c){
 /*
  * TODO: debug all these.
  * */
-int strcmp(char *s1, char *s2){
+int strcmp(const char *s1, const char *s2){
     while (*s1 == *s2++)
         if (*s1++ == 0)
             return (0);
     return (*(unsigned char*)s1 - *(unsigned char*)(s2-1));
 }
 
-int strncmp(char *s1, char* s2, unsigned int n) {
+int strncmp(const char *s1, const char* s2, unsigned int n) {
     if (n == 0)
         return 0;
     while(n-- != 0) {

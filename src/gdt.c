@@ -1,6 +1,6 @@
-#include "gdt.h"
 #include "string.h"
 #include "type.h"
+#include "gdt.h"
 
 #define GDT_LENGTH 5
 
