@@ -1,5 +1,5 @@
 #include "kernelio.h"
-#include "console.h"
+#include "monitor.h"
 #include "string.h"
 
 static int vsprintf(char *buff, const char *format, va_list args);
@@ -15,7 +15,7 @@ void printf(const char *format, ...) {
 
 	buff[i] = '\0';
 
-	console_write(buff);
+	monitor_write(buff);
 }
 
 void printf_color(real_color_t back, real_color_t fore, const char *format, ...) {
@@ -29,7 +29,7 @@ void printf_color(real_color_t back, real_color_t fore, const char *format, ...)
 
 	buff[i] = '\0';
 
-	console_write_color(buff, back, fore);
+	monitor_write_color(buff, back, fore);
 }
 
 #define is_digit(c)	((c) >= '0' && (c) <= '9')

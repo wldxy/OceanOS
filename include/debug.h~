@@ -1,7 +1,7 @@
 #ifndef _DEBUG_H_
 #define _DEBUG_H_
 
-#include "monitor.h"
+#include "console.h"
 #include "kernelio.h"
 #include "elf.h"
 
