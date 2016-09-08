@@ -19,25 +19,48 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="include/console.h" />
+		<Unit filename="include/debug.h" />
+		<Unit filename="include/elf.h" />
+		<Unit filename="include/gdt.h" />
 		<Unit filename="include/io.h" />
 		<Unit filename="include/kernelio.h" />
+		<Unit filename="include/memory.h" />
+		<Unit filename="include/monitor.h" />
+		<Unit filename="include/multiboot.h" />
 		<Unit filename="include/string.h" />
+		<Unit filename="include/trap.h" />
 		<Unit filename="include/type.h" />
 		<Unit filename="src/boot.s" />
-		<Unit filename="src/console.c">
+		<Unit filename="src/debug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/elf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/gdt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/gdt_s.s" />
+		<Unit filename="src/init.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/kernel.ld" />
 		<Unit filename="src/kernelio.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="src/main.c">
+		<Unit filename="src/memory.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/monitor.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/string.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/trap.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/trap_s.s" />
 		<Extensions>
 			<code_completion />
 			<debugger />

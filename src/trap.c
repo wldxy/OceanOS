@@ -32,7 +32,7 @@ void init_trap() {
     outb(0x21, 0x0);
     outb(0xA1, 0x0);
 
-    memset((uint8_t *)&handlers, 0, sizeof(handlers) * 256);
+    memset((uint8_t *)&handlers, 0, sizeof(interrupt_handler_t) * 256);
 
     idtr.limit = sizeof(idtr_t) * 256 - 1;
     idtr.base = (uint32_t)&idts;
@@ -100,7 +100,6 @@ void timer_callback(register_t* reg) {
 }
 
 void init_timer(uint32_t f) {
-    printf("read");
     register_interrupt_handler(IRQ0, timer_callback);
 
     uint32_t d = 1193180 / f;
@@ -133,7 +132,6 @@ void isr_handler(register_t* reg) {
 }
 
 void irq_handler(register_t* reg) {
-    printf("check");
     if (reg->int_no >= 40) {
         outb(0xA0, 0x20);
     }

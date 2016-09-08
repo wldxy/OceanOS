@@ -62,10 +62,10 @@ qemu:
 
 .PHONY:bochs
 bochs:
-	bochs -f scripts/bochsrc.txt
+	bochs -f bochsrc.txt
 
 .PHONY:debug
 debug:
 	qemu -S -s -fda floppy.img -boot a &
 	sleep 1
-	cgdb -x scripts/gdbinit
+	cgdb -x gdbinit

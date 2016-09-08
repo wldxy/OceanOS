@@ -17,9 +17,27 @@ static inline uint8_t inb(uint16_t port){
     return ret;
 }
 
+static inline uint8_t inb_p(uint16_t port) {
+    uint8_t ret;
+    asm volatile("inb %1, %0\n\t"
+            // "outb %0,$0x80\n\t"
+            // "outb %0,$0x80\n\t"
+            // "outb %0,$0x80\n\t"
+            "outb %0,$0x80"
+            :"=a" (ret)
+            :"d" ((uint16_t) port));
+    return ret;
+}
+
 static inline void outb(uint16_t port, uint8_t data){
     asm volatile( "outb %1, %0" :: "dN" (port), "a" (data));
     io_delay();
+}
+
+static inline void outb_p(uint16_t port, char data) {
+    asm volatile("outb %0,%1\n\t"
+            "outb %0,$0x80"
+            ::"a" ((char) data),"d" ((uint16_t) port));
 }
 
 /* inw & outw */

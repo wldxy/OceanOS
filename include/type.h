@@ -17,6 +17,11 @@ typedef          short int16_t;
 typedef unsigned char  uint8_t;
 typedef          char  int8_t;
 
+typedef unsigned int   pid_t;
+
+typedef unsigned int   pgd_t;
+typedef unsigned int   pte_t;
+
 typedef
 enum real_color {
     rc_black = 0,
