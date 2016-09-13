@@ -75,7 +75,7 @@ void testMalloc() {
 int testA(void* str) {
     int k = 0;
     while (k++ < 15) {
-        printf(rc_red, rc_red, " * proc A : %s  %d* \n", (char*)str, k);
+        printf_color(rc_red, rc_red, " * proc A : %s  %d* \n", (char*)str, k);
         sleep(2);
     }
 
@@ -84,7 +84,7 @@ int testA(void* str) {
 int testB(void* str) {
     int k = 0;
     while (k++ < 15) {
-        printf(rc_green, rc_green, " * proc B : %s  %d* \n", (char*)str, k);
+        printf_color(rc_green, rc_green, " * proc B : %s  %d* \n", (char*)str, k);
         sleep(2);
     }
 }
@@ -92,7 +92,7 @@ int testB(void* str) {
 int testC(void* str) {
     int k = 0;
     while (k++ < 15) {
-        printf_color(rc_blue, rc_blue, " * proc C : %s  %d* ", (char*)str, k);
+        printf_color(rc_blue, rc_blue, " * proc C : %s  %d* \n", (char*)str, k);
         sleep(2);
     }
 }
@@ -127,5 +127,3 @@ void testProcess() {
     //showMemu();
 
 }
-
-

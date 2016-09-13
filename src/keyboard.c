@@ -338,7 +338,6 @@ void cursor(uint8_t scan_code) {
     } else {                // 小键盘上的数字键
         ch = number_tab[i];
     }
-    // put_queue(ch);
 
     return;
 }
@@ -351,6 +350,7 @@ void func(uint8_t scan_code)
     switch (i) {
         case 1 : testMalloc();break;
         case 2 : testProcess();break;
+        //case 3 : xioayouxi();break;
     }
 
     return;
@@ -362,7 +362,6 @@ void minus(uint8_t scan_code)
     if (e0 != 1) {
         do_self(scan_code);
     } else {
-        // put_queue((u32) '/');
     }
     return;
 }

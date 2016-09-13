@@ -35,7 +35,13 @@
 		<Unit filename="include/system.h" />
 		<Unit filename="include/trap.h" />
 		<Unit filename="include/type.h" />
+		<Unit filename="src/_doscan.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/boot.s" />
+		<Unit filename="src/buffer.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/debug.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -68,11 +74,20 @@
 		<Unit filename="src/monitor.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/printf.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/proc_s.s" />
 		<Unit filename="src/process.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/scanf.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/string.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/test.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/trap.c">
