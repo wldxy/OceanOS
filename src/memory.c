@@ -4,6 +4,7 @@
 #include "multiboot.h"
 #include "trap.h"
 #include "string.h"
+#include "system.h"
 
 static uint32_t _stack[PAGE_MAX_SIZE+1];
 static uint32_t _top;
@@ -63,11 +64,7 @@ void init_vmm() {
 
     register_interrupt_handler(14, &page_fault);
 
-    switch_pgd(pgd_kern_phy_addr);
-}
-
-void switch_pgd(uint32_t pd) {
-    asm volatile ("mov %0, %%cr3" : : "r" (pd));
+    set_cr3(pgd_kern_phy_addr);
 }
 
 void map(pgd_t *pgd_now, uint32_t va, uint32_t pa, uint32_t flags)

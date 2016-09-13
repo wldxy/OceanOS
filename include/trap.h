@@ -37,6 +37,10 @@ void isr_handler(register_t* reg);
 
 void irq_handler(register_t* reg);
 
+void sleep(uint32_t t);
+
+uint32_t getTicks();
+
 extern void idt_to_idtr(uint32_t);
 
 // CPU Error

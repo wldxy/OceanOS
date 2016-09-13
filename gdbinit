@@ -1,4 +1,4 @@
-file hx_kernel
+file OceanOs
 target remote :1234
-break init_trap
+break schedule
 c

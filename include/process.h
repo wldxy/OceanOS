@@ -23,37 +23,33 @@ struct context_info {
 
 struct memory_map {
     pgd_t* pgd;
-}
+};
 
-typedef
-struct process_struct {
+struct process_t {
     volatile process_state state;
     pid_t pid;
     void* stack;
     struct memory_map* memory;
     struct context_info context;
-    struct process_struct* next;
-    uint8_t priority;
-} process_t;
+    struct process_t* next;
+};
 
-extern pid_t cur_pid;
+extern struct process_t *run_head;
 
-extern process_t *proc_running_list_head;
+extern struct process_t *proc_wait_list_head;
 
-extern process_t *proc_wait_list_head;
-
-extern process_t *cur_proc;
+extern struct process_t *cur_proc;
 
 void init_proc_schedule();
 
-int32_t init_thread(int (*fn)(void *), void *arg);
+pid_t init_thread(int (*fn)(void *), void *arg);
 
 void thread_exit();
 
 void schedule();
 
-void change_proc(process_t *proc);
+void change_proc(struct process_t *proc);
 
-void switch_proc(struct context* prev, struct context* next);
+void switch_to(struct context_info* prev, struct context_info* next);
 
 #endif // _PROCESS_H_

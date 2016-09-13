@@ -2,6 +2,7 @@
 #include "io.h"
 #include "debug.h"
 #include "string.h"
+#include "process.h"
 
 #define IDT_LENGTH 256
 
@@ -10,6 +11,8 @@ idt_t idts[IDT_LENGTH];
 idtr_t idtr;
 
 interrupt_handler_t handlers[256];
+
+uint32_t ticks;
 
 static void setIdt(uint8_t num, uint32_t base, uint16_t sel, uint8_t flags);
 
@@ -95,12 +98,14 @@ void init_trap() {
 }
 
 void timer_callback(register_t* reg) {
-    static uint32_t k = 0;
-    printf_color(rc_black, rc_red, "Tick: %d\n", k++);
+    ticks++;
+    schedule();
 }
 
 void init_timer(uint32_t f) {
     register_interrupt_handler(IRQ0, timer_callback);
+
+    ticks = 0;
 
     uint32_t d = 1193180 / f;
 
@@ -144,4 +149,13 @@ void irq_handler(register_t* reg) {
 
 void register_interrupt_handler(uint8_t num, interrupt_handler_t h) {
     handlers[num] = h;
+}
+
+uint32_t getTicks() {
+    return ticks;
+}
+
+void sleep(uint32_t t) {
+    int st = getTicks();
+    while (ticks - st < t) {}
 }

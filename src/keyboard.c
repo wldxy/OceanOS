@@ -2,6 +2,8 @@
 #include "trap.h"
 #include "io.h"
 #include "kernelio.h"
+#include "buffer.h"
+#include "test.h"
 
 //mode 是键盘特殊键的按下状态
 //表示大小写转换键caps，交换键alt，控制键ctrl，换档键shift的状态
@@ -60,7 +62,7 @@ static void minus(uint8_t scan_code);
 static void cursor(uint8_t scan_code);
 
 static void func(uint8_t scan_code);
-static void scroll(uint8_t scan_code);
+static void screen_scroll(uint8_t scan_code);
 static void alt(uint8_t scan_code);
 static void unalt(uint8_t scan_code);
 
@@ -89,7 +91,7 @@ static keyfn_ptr key_tab[] = {
     (keyfn_ptr)alt,     (keyfn_ptr)do_self, (keyfn_ptr)caps,    (keyfn_ptr)func,        /* 38-3B alt sp caps f1 */
     (keyfn_ptr)func,    (keyfn_ptr)func,    (keyfn_ptr)func,    (keyfn_ptr)func,        /* 3C-3F f2 f3 f4 f5 */
     (keyfn_ptr)func,    (keyfn_ptr)func,    (keyfn_ptr)func,    (keyfn_ptr)func,        /* 40-43 f6 f7 f8 f9 */
-    (keyfn_ptr)func,    (keyfn_ptr)num,     (keyfn_ptr)scroll,  (keyfn_ptr)cursor,      /* 44-47 f10 num scr home */
+    (keyfn_ptr)func,    (keyfn_ptr)num,     (keyfn_ptr)screen_scroll,  (keyfn_ptr)cursor,      /* 44-47 f10 num scr home */
     (keyfn_ptr)cursor,  (keyfn_ptr)cursor,  (keyfn_ptr)do_self, (keyfn_ptr)cursor,      /* 48-4B up pgup - left */
     (keyfn_ptr)cursor,  (keyfn_ptr)cursor,  (keyfn_ptr)do_self, (keyfn_ptr)cursor,      /* 4C-4F n5 right + end */
     (keyfn_ptr)cursor,  (keyfn_ptr)cursor,  (keyfn_ptr)cursor,  (keyfn_ptr)cursor,      /* 50-53 dn pgdn ins del */
@@ -215,6 +217,7 @@ void do_self(uint8_t scan_code)
     ch &= 0xff;
     // put_queue(ch);
     printf("%c", ch);
+    put_buffer((char)ch);
 
     return;
 }
@@ -301,7 +304,7 @@ void uncaps(uint8_t scan_code) {
 }
 
 //取消scroll
-void scroll(uint8_t scan_code) {
+void screen_scroll(uint8_t scan_code) {
     leds ^= 0x1;
     setleds();
     return;
@@ -343,7 +346,12 @@ void cursor(uint8_t scan_code) {
 //处理功能键
 void func(uint8_t scan_code)
 {
-    uint8_t i = scan_code - 59;     //功能从59开始
+    uint8_t i = scan_code - 58;     //功能从59开始
+    printf("func :%d\n", i);
+    switch (i) {
+        case 1 : testMalloc();break;
+        case 2 : testProcess();break;
+    }
 
     return;
 }

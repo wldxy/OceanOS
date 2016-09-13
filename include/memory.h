@@ -40,6 +40,7 @@
 
 extern uint8_t _start[];
 extern uint8_t _end[];
+extern uint32_t kern_stack_top;
 
 extern uint32_t pgd_kern[PGD_SIZE];
 
@@ -48,7 +49,6 @@ uint32_t alloc_page();
 void free_page();
 
 void init_vmm();
-void switch_pgd(uint32_t p);
 void map(pgd_t* pgd_now, uint32_t va, uint32_t pa, uint32_t flags);
 void unmap(pgd_t *pgd_now, uint32_t va);
 uint32_t get_mapping(pgd_t *pgd_now, uint32_t va, uint32_t *pa);

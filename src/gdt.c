@@ -2,8 +2,6 @@
 #include "type.h"
 #include "gdt.h"
 
-#define GDT_LENGTH 5
-
 gdt_t gdt[GDT_LENGTH];
 
 gdtr_t gdtr;

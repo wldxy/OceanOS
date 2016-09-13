@@ -3,6 +3,8 @@
 
 #include "type.h"
 
+#define GDT_LENGTH 5
+
 struct gdt_struct {
     uint16_t limit_low;
     uint16_t base_low;

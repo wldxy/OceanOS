@@ -1,14 +1,4 @@
 #!Makefile
-#
-# --------------------------------------------------------
-#
-#    hurlex 这个小内核的 Makefile
-#    默认使用的C语言编译器是 GCC、汇编语言编译器是 nasm
-#
-# --------------------------------------------------------
-#
-
-# patsubst 处理所有在 C_SOURCES 字列中的字（一列文件名），如果它的 结尾是 '.c'，就用 '.o' 把 '.c' 取代
 C_SOURCES = $(shell find . -name "*.c")
 C_OBJECTS = $(patsubst %.c, %.o, $(C_SOURCES))
 S_SOURCES = $(shell find . -name "*.s")
@@ -35,16 +25,16 @@ all: $(S_OBJECTS) $(C_OBJECTS) link update_image
 
 link:
 	@echo 链接内核文件...
-	$(LD) $(LD_FLAGS) $(S_OBJECTS) $(C_OBJECTS) -o hx_kernel
+	$(LD) $(LD_FLAGS) $(S_OBJECTS) $(C_OBJECTS) -o OceanOs
 
 .PHONY:clean
 clean:
-	$(RM) $(S_OBJECTS) $(C_OBJECTS) hx_kernel
+	$(RM) $(S_OBJECTS) $(C_OBJECTS) OceanOs
 
 .PHONY:update_image
 update_image:
 	sudo mount floppy.img /mnt/kernel
-	sudo cp hx_kernel /mnt/kernel/hx_kernel
+	sudo cp OceanOs /mnt/kernel/OceanOs
 	sleep 1
 	sudo umount /mnt/kernel
 
@@ -68,4 +58,4 @@ bochs:
 debug:
 	qemu -S -s -fda floppy.img -boot a &
 	sleep 1
-	cgdb -x scripts/gdbinit
+	cgdb -x gdbinit

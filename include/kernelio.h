@@ -13,4 +13,8 @@ void printf(const char *format, ...);
 
 void printf_color(real_color_t back, real_color_t fore, const char *format, ...);
 
+void scanf(const char *format, ...);
+
+int _doscan(register void *x, const char *format, va_list ap);
+
 #endif
