@@ -36,12 +36,13 @@ pid_t init_thread(int (*fn)(void *), void *arg) {
     new_proc->pid = cur_pid++;
     new_proc->memory = NULL;
 
+    // push stack
     uint32_t *stack_top = (uint32_t*)((uint32_t)new_proc + STACK_SIZE);
     *(--stack_top) = (uint32_t)arg;
     *(--stack_top) = (uint32_t)thread_exit;
     *(--stack_top) = (uint32_t)fn;
-
     new_proc->context.esp = (uint32_t)new_proc + STACK_SIZE - sizeof(uint32_t) * 3;
+
     new_proc->context.eflags = 0x200;
     new_proc->next = run_head;
 
